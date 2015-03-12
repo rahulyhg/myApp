@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ngCordova.plugins.fileTransfer','ngCordova.plugins.imagePicker'])
+angular.module('starter.controllers', ['ngCordova','ngCordova.plugins.fileTransfer','ngCordova.plugins.imagePicker'])
 
 .controller('DashCtrl', function($scope, $cordovaFileTransfer, $cordovaImagePicker) {
 
