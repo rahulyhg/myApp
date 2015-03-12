@@ -3,6 +3,7 @@ angular.module('starter.controllers', ['ngCordova.plugins.fileTransfer','ngCordo
 .controller('DashCtrl', function($scope, $cordovaFileTransfer, $cordovaImagePicker) {
 
     $scope.pickimage = function() {
+		console.log("incontroller");
         var options = {
             maximumImagesCount: 1,
             width: 800,
@@ -18,13 +19,15 @@ angular.module('starter.controllers', ['ngCordova.plugins.fileTransfer','ngCordo
                     $scope.$apply();
                 }
             }, function(error) {
+				console.log("error in getting photos");
                 // error getting photos
             });
     };
+//	var filePath = cordova.file.documentsDirectory 
     $scope.submitfile = function() {
         //        $scope.file=$('input[type=file]').files[0].webkitRelativePath;
         //        console.log($scope.file);
-        $cordovaFileTransfer.upload(server, filePath, options)
+        $cordovaFileTransfer.upload("http://mafiawarloots.com/sergybackend/uploads/", filePath, options)
             .then(function(result) {
                 // Success!
             }, function(err) {
