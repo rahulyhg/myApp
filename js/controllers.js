@@ -1,11 +1,40 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngCordova.plugins.fileTransfer','ngCordova.plugins.imagePicker'])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, $cordovaFileTransfer, $cordovaImagePicker) {
 
-    $scope.doSomething = function() {
-        window.open('http://dellcampassador.com/index.php/hauth/login/Facebook', '_blank', 'location=yes');
+    $scope.pickimage = function() {
+        var options = {
+            maximumImagesCount: 1,
+            width: 800,
+            height: 800,
+            quality: 80
+        };
+
+        $cordovaImagePicker.getPictures(options)
+            .then(function(results) {
+                for (var i = 0; i < results.length; i++) {
+                    console.log('Image URI: ' + results[i]);
+                    $scope.file += results[i];
+                    $scope.$apply();
+                }
+            }, function(error) {
+                // error getting photos
+            });
     };
+    $scope.submitfile = function() {
+        //        $scope.file=$('input[type=file]').files[0].webkitRelativePath;
+        //        console.log($scope.file);
+        $cordovaFileTransfer.upload(server, filePath, options)
+            .then(function(result) {
+                // Success!
+            }, function(err) {
+                // Error
+            }, function(progress) {
+                // constant progress updates
+            });
 
+
+    };
 
 })
 
